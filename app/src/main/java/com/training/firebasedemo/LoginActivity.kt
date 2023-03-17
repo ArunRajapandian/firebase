@@ -17,11 +17,10 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : CommonActivity() {
 
-    private lateinit var mAuth: FirebaseAuth
 
-    lateinit var binding:ActivityMainBinding
+    private lateinit var binding:ActivityMainBinding
     var email=""
     var password=""
 
@@ -29,22 +28,18 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        mAuth = Firebase.auth
+        initFireBase()
         binding.tvContent.isVisible = false
         binding.tvLogin.isVisible =false
+
         binding.btnSubmit.setOnClickListener {
+
             email= binding.edPhone.text.toString()
             password = binding.edPassword.text.toString()
 
-            if (email.isNotEmpty() && password.isNotEmpty()){
-               loginUser(email,password)
-            }else  Toast.makeText(this,"fill Credential",Toast.LENGTH_SHORT).show()
+            if (email.isNotEmpty() && password.isNotEmpty()) loginUser(email,password) else  Toast.makeText(this," PLease fill Credential",Toast.LENGTH_SHORT).show()
 
         }
-
-
-
-
     }
 
     private fun loginUser(email: String, password: String) {
@@ -53,14 +48,12 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     Toast.makeText(baseContext, "Login Success", Toast.LENGTH_SHORT).show()
                     callProfilePage()
-                    val user = mAuth.currentUser
+                    userId= mAuth.currentUser!!.uid
                 } else {
-                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(baseContext, task.exception.toString(),
-                        Toast.LENGTH_SHORT).show()
-
+                    Toast.makeText(baseContext, task.exception.toString(), Toast.LENGTH_SHORT).show()
                 }
-            }    }
+            }
+    }
 
     private fun callProfilePage() {
         val intent =Intent(this,UserDetailsActivity::class.java)

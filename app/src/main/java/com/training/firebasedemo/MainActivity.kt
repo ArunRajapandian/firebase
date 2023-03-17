@@ -16,9 +16,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 
-class MainActivity : AppCompatActivity() {
-
-    private lateinit var mAuth: FirebaseAuth
+class MainActivity : CommonActivity() {
 
     lateinit var binding:ActivityMainBinding
     var email=""
@@ -28,22 +26,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        mAuth = Firebase.auth
+        initFireBase()
+
 
         binding.btnSubmit.setOnClickListener {
+
             email= binding.edPhone.text.toString()
             password = binding.edPassword.text.toString()
 
-            if (email.isNotEmpty() && password.isNotEmpty()){
-               registerNewUser(email,password)
-            }else  Toast.makeText(this,"fill Credential",Toast.LENGTH_SHORT).show()
+            if (email.isNotEmpty() && password.isNotEmpty()) registerNewUser(email,password) else  Toast.makeText(this,"fill Credential",Toast.LENGTH_SHORT).show()
 
         }
-        binding.tvLogin.setOnClickListener {
-            callLoginPage()
-        }
 
-
+        binding.tvLogin.setOnClickListener { callLoginPage() }
 
     }
 
@@ -56,16 +51,11 @@ class MainActivity : AppCompatActivity() {
         mAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(baseContext, "Registration complete",
-                        Toast.LENGTH_SHORT).show()
-                    val user = mAuth.currentUser
+                    Toast.makeText(baseContext, "Registration complete", Toast.LENGTH_SHORT).show()
+                    userId = mAuth.currentUser!!.uid
                     callProfilePage()
-                } else {
-                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(baseContext, task.exception.toString(),
-                        Toast.LENGTH_SHORT).show()
+                } else Toast.makeText(baseContext, task.exception.toString(), Toast.LENGTH_SHORT).show()
 
-                }
             }
     }
     private fun callProfilePage() {

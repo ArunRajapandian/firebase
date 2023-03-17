@@ -50,4 +50,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.firebase:firebase-firestore-ktx'
+
+    //for DB
+    implementation 'com.google.firebase:firebase-database:20.1.0'
+
+
 }
