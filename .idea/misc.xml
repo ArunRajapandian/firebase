@@ -5,7 +5,10 @@
       <map>
         <entry key="app/src/main/res/drawable-v24/bg_curved_border.xml" value="0.2557291666666667" />
         <entry key="app/src/main/res/drawable/bg_curvd_top_tiny.xml" value="0.2557291666666667" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.23958333333333334" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.23958333333333334" />
+        <entry key="app/src/main/res/layout/activity_user_detaisl.xml" value="0.23958333333333334" />
       </map>
     </option>
   </component>

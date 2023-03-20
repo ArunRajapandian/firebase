@@ -54,5 +54,7 @@ dependencies {
     //for DB
     implementation 'com.google.firebase:firebase-database:20.1.0'
 
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.15'
+
 
 }

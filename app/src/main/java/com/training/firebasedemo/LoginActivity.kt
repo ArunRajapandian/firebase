@@ -1,32 +1,21 @@
 package com.training.firebasedemo
-
-import android.content.ContentValues.TAG
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.auth.FirebaseAuth
-import com.training.firebasedemo.databinding.ActivityMainBinding
-import java.lang.Exception
 import android.content.Intent
-import android.util.Log
 import androidx.core.view.isVisible
-
-import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import com.training.firebasedemo.databinding.ActivityRegisterBinding
 
 
 class LoginActivity : CommonActivity() {
 
 
-    private lateinit var binding:ActivityMainBinding
+    private lateinit var binding:ActivityRegisterBinding
     var email=""
     var password=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initFireBase()
         binding.tvContent.isVisible = false
@@ -47,7 +36,7 @@ class LoginActivity : CommonActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(baseContext, "Login Success", Toast.LENGTH_SHORT).show()
-                    callProfilePage()
+                    callProfile()
                     userId= mAuth.currentUser!!.uid
                 } else {
                     Toast.makeText(baseContext, task.exception.toString(), Toast.LENGTH_SHORT).show()
@@ -55,7 +44,7 @@ class LoginActivity : CommonActivity() {
             }
     }
 
-    private fun callProfilePage() {
+    private fun callProfile() {
         val intent =Intent(this,UserDetailsActivity::class.java)
         startActivity(intent)
     }

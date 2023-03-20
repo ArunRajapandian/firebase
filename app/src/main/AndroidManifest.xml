@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyTest">
         <activity
-            android:name="com.training.firebasedemo.MainActivity"
+            android:name="com.training.firebasedemo.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,6 +22,7 @@
 
         <activity android:name=".LoginActivity"/>
         <activity android:name=".UserDetailsActivity"/>
+        <activity android:name=".RegisterActivity"/>
     </application>
 
 </manifest>

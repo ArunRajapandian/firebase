@@ -5,17 +5,21 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 
 
 open class CommonActivity : AppCompatActivity() {
     lateinit var mAuth: FirebaseAuth
     lateinit var sharedPreferences:SharedPreferences
+    lateinit var databaseReference: DatabaseReference
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar!!.hide()
+
         sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE)
 
     }
@@ -26,5 +30,6 @@ open class CommonActivity : AppCompatActivity() {
 
     fun initFireBase() {
         mAuth = Firebase.auth
+        databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl(CommonData.firebaseRoute)
     }
 }
